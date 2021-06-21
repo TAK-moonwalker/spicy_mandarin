@@ -1,0 +1,14 @@
+{
+  "name": "spicy_mandarin",
+  "version": "1.0.0",
+  "description": "Spicy Mandarin Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tak",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
