@@ -7,7 +7,7 @@ function loadVideos() {
   
     //DOM elements
 
-    const gallery = document.querySelector('section.imgGallery.row')
+    const gallery = document.querySelector('div.row')
     const modal = document.querySelector('section.videoModal')
   
     fetch(URL,{
@@ -26,11 +26,12 @@ let videoModal = "";
 
 for(let i = 0; i < resData.items.length; i++){
 
-let thumImgUrl = resData.items[0].snippet.thumbnails.medium.url;
-let videoTitle = resData.items[0].snippet.title;
-let videoId = resData.items[0].snippet.resourceId.videoId;
+let thumImgUrl = resData.items[i].snippet.thumbnails.high.url;
+let videoTitle = resData.items[i].snippet.title;
+let videoId = resData.items[i].snippet.resourceId.videoId;
+let target = i;
 
-imgGallery += `<div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+imgGallery += `<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
 <div
   class="bg-image hover-overlay ripple shadow-1-strong rounded"
   data-ripple-color="light"
@@ -42,7 +43,7 @@ imgGallery += `<div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
   />
   <figcaption>${videoTitle}</figcaption>
   </figure>
-  <a href="#!" data-mdb-toggle="modal" data-mdb-target="#exampleModal1">
+  <a href="#!" data-mdb-toggle="modal" data-mdb-target="#Modal${target}">
     <div class="mask" style="background-color: rgba(251, 251, 251, 0.2);"></div>
   </a>
 </div>
@@ -50,7 +51,7 @@ imgGallery += `<div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
 
 videoModal += `<div
 class="modal fade"
-id="exampleModal1"
+id="Modal${target}"
 tabindex="-1"
 aria-labelledby="exampleModal1Label"
 aria-hidden="true"
@@ -59,7 +60,7 @@ aria-hidden="true"
   <div class="modal-content">
     <div class="ratio ratio-16x9">
       <iframe
-        src="https://www.youtube.com/embed/${videoId}
+        src="https://www.youtube.com/embed/${videoId}"
         title="${videoTitle}"
         allowfullscreen
       ></iframe>
@@ -77,9 +78,10 @@ aria-hidden="true"
 
 console.log(imgGallery);
 console.log(videoModal);
-
-gallery.innerHTML=imgGallery;
-modal.innerHTML=videoModal;
+console.log(modal);
+console.log(gallery);
+gallery.innerHTML+=imgGallery;
+modal.innerHTML+=videoModal;
 
 }).catch(function(error) {
         console.log("Looks like there was a problem: \n", error);
