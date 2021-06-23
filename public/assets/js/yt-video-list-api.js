@@ -4,12 +4,13 @@ function loadVideos() {
 
     const mykey = "AIzaSyDpRIwauWZH7bueOaGJlPXgthsZxvp8-aI";
     const playListID = "PLa0YnQw04I6tWGRCtKrB9L5bZnK9GEbHP";
+    const maxRes = 12;
   
-    const URL =  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=12&playlistId=${playListID}&key=${mykey}`;
+    const URL =  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${maxRes}&playlistId=${playListID}&key=${mykey}`;
   
     //DOM elements
 
-    const gallery = document.querySelector('div.row')
+    const gallery = document.querySelector('.imgGallery div.row')
     const modal = document.querySelector('section.videoModal')
   
     fetch(URL,{
@@ -92,4 +93,4 @@ modal.innerHTML+=videoModal;
   
 
 // Invoking the loadVideos function
-loadVideos();
+document.addEventListener("DOMContentLoaded", loadVideos);
