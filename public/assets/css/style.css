@@ -1577,3 +1577,7 @@ figure figcaption {
   margin: 0 auto;
   pointer-events: all;
 }
+
+.video-padding{
+padding:20px;
+}
