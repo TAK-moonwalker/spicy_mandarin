@@ -20,12 +20,15 @@ hbs.registerPartials(partialPath);
 // set-up static directory to serve
 app.use(express.static(publicDir));
 
+
+
+// routing
+// spicy-mandarin.com/ => root
 app.get('/',(req, res)=>{
 res.render('index')
 })
 
-// routing
-// spicy-mandarin.com/ => root
+
 
 
 app.get('*', (req, res)=>{
