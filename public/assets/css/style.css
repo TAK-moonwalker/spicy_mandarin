@@ -133,7 +133,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header .logo {
-  font-size: 32px;
+  font-size: 2rem;
   margin: 0;
   padding: 0;
   line-height: 1;
@@ -160,10 +160,10 @@ h1, h2, h3, h4, h5, h6 {
 .get-started-btn {
   color: #fff;
   border-radius: 4px;
-  padding: 7px 25px 8px 25px;
+  padding: 7px 20px 8px 20px;
   white-space: nowrap;
   transition: 0.3s;
-  font-size: 14px;
+  font-size: 1rem;
   display: inline-block;
   border: 2px solid #ffc451;
 }
