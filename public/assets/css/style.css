@@ -1606,3 +1606,7 @@ background-color: #292929;
     min-height:calc(100% - (1.75rem * 2));
   }
 }
+
+.modal {
+  overflow-y:auto;
+}
