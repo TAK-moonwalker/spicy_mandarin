@@ -38,7 +38,7 @@ imgGallery +=
 `<!--create modal-->
 <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
 <div class="modal fade" id="modal${target}">
-<div class="modal-dialog">
+<div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
 <div class="modal-header">
     <h6>${videoTitle}</h6>
