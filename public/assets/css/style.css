@@ -1581,3 +1581,7 @@ figure figcaption {
 .video-padding{
 padding:20px;
 }
+
+.black-bg{
+background-color: #292929;
+}

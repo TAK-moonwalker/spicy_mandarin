@@ -32,7 +32,7 @@ res.render('index')
 
 
 app.get('*', (req, res)=>{
-    send.res('404 not found!')
+    res.send('404 not found!')
 })
 
 app.listen(port, ()=>{
