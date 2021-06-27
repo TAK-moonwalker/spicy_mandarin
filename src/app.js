@@ -28,6 +28,10 @@ app.get('/',(req, res)=>{
 res.render('index')
 })
 
+// /videos
+app.get('/videos',(req, res)=>{
+    res.render('videos')
+    })
 
 
 
