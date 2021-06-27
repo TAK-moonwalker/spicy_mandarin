@@ -31,8 +31,9 @@
       <div class="modal fade" id="modalVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content gray">
-<div class="modal-header align-middle">
+<div class="modal-header">
   <h3>Member page</h3>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
   <p><span class="font-weight-bold">Member can access all of our videos.</span><br>
@@ -41,14 +42,13 @@
 </p>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <button id="modalbtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 </div>
           </div>
         </div>
-    </div>
- 
-  </div>
-</div>
+ </div>
+          </div>
+        </div>
   <div id="overlay"></div>
 <!-- ======= video ======= -->
 <section id="videos" class="black-bg">
@@ -157,6 +157,9 @@ $(document).ready(function(){
   setTimeout(()=>{
 $('#modalVideo').modal('show');
   }, 2000)
+})
+$('#modalbtn').click(()=>{
+  $('#modalVideo').hide()
 })
 
 </script>
