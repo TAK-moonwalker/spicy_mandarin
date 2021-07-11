@@ -11,6 +11,9 @@ const port = process.env.PORT || 3030;
 const publicDir = path.join(__dirname, "../public")
 const viewsPath = path.join(__dirname, "../templates/views")
 const partialPath = path.join(__dirname, "../templates/partials")
+const images = path.join(__dirname, "../public/assets/gallery-images")
+console.log(images);
+
 
 // set-uo handlebars engine and path to views
 app.set('view engine', 'hbs');
