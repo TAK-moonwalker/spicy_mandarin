@@ -4,15 +4,19 @@
   "description": "Spicy Mandarin Project",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js start"
+    "start": "node src/app.js start",
+    "dev": "nodemon src/app.js"
   },
   "author": "Tak",
   "license": "ISC",
   "dependencies": {
+    "@fancyapps/ui": "*",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "hbs": "^4.1.2",
-    "mongoose": "^5.12.14",
-    "nodemon": "^2.0.7"
+    "mongoose": "^5.12.14"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }

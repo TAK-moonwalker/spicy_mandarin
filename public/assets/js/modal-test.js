@@ -74,6 +74,7 @@ modalLocation.innerHTML += videoModal;
       });
   } // End of loadVideos function
   
+  
 
 // Invoking the loadVideos function
-document.addEventListener("DOMContentLoaded", loadVideos);
+//document.addEventListener("DOMContentLoaded", loadVideos);

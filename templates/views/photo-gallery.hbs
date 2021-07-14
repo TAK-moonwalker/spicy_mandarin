@@ -1,0 +1,78 @@
+{{>header}}
+
+<style type="text/css">
+.item{
+  transition: .5s ease-in-out;
+}
+.item:hover{
+  filter: brightness(70%);
+}
+</style>
+
+<body>
+{{>navi}}
+
+<!--
+<p>
+<ol>
+  {{#each list}}
+    <li>assets/gallery-images/{{this}}</li>
+  {{/each}}
+</ol>
+
+</p>
+-->
+
+<section id="photoGallery">
+  <div class="container-fluid">
+<div class="row">
+{{#each list}}
+  <div class="item col-6 col-md-4 col-lg-3 p-0">
+  
+      <a id="@index" href="assets/gallery-images/{{this}}" data-fancybox="gallery">
+    <img src="assets/gallery-images/{{this}}" width="100%" height="100%">
+    </a>
+  </div>
+{{/each}}
+</div>
+</div>
+
+
+</section>
+
+
+  {{>footer}}
+
+<script>
+  Fancybox.bind('[data-fancybox="gallery"]', {
+  dragToClose: false,
+  closeButton: "top",
+
+  Image: {
+    zoom: false,
+  },
+
+  on: {
+    initCarousel: (fancybox) => {
+      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
+
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+    "Carousel.change": (fancybox, carousel, to, from) => {
+      const slide = carousel.slides[to];
+
+      fancybox.$container.style.setProperty(
+        "--bg-image",
+        `url("${slide.$thumb.src}")`
+      );
+    },
+  },
+});
+</script>
+
+</body>
+
+</html>
