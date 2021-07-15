@@ -1,0 +1,49 @@
+{{>header}}
+
+<style type="text/css">
+.item{
+  transition: .5s ease-in-out;
+}
+.item:hover{
+  filter: brightness(70%);
+}
+
+.thumbnail{
+  object-fit:cover;
+  width:100%;
+  height:auto;
+}
+</style>
+
+<body>
+{{>navi}}
+
+<!-- ======= contents ======= -->
+<section>
+<div class="container-fluid bg-dark text-white flex">
+
+<div class="row">
+
+{{#each videoID srcUrl titles}}
+
+  <div class="item col-6 col-md-4 col-lg-3">
+    <a href="https://www.youtube.com/embed/{{videoID}}" data-fancybox data-type="iframe" data-preload="false"
+  >
+  <figure>
+  <img class="img-fluid z-depth-1" src="{{srcUrl}}" alt="video">
+  <figcaption>{{titles}}</figcaption>
+  </figure>
+</a>
+</div>
+
+{{/each}}
+
+</div>
+
+</div>
+</section>
+{{>footer}}
+
+</body>
+
+</html>

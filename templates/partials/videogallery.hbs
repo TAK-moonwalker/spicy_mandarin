@@ -1,0 +1,26 @@
+
+<!-- ======= contents ======= -->
+
+<div class="container-fluid bg-dark text-white flex">
+
+<div class="row">
+
+{{#each resArray}}
+  <div class="item col-6 col-md-4 col-lg-3">
+    <a
+    href="https://www.youtube.com/embed/{{this.snippet.resourceId.videoId}}"
+    data-fancybox
+    data-type="iframe"
+    data-preload="false"
+  >
+  <figure>
+  <img class="img-fluid z-depth-1" src="{{this.snippet.thumbnails.midium.url}}" alt="video">
+  <figcaption>{{@index}}{{this.snippet.title}}</figcaption>
+  </figure>
+</a>
+</div>
+{{/each}}
+
+</div>
+
+</div>

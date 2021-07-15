@@ -7,6 +7,12 @@
 .item:hover{
   filter: brightness(70%);
 }
+
+.thumbnail{
+  object-fit:cover;
+  width:100%;
+  height:auto;
+}
 </style>
 
 <body>
@@ -30,7 +36,7 @@
   <div class="item col-6 col-md-4 col-lg-3 p-0">
   
       <a id="@index" href="assets/gallery-images/{{this}}" data-fancybox="gallery">
-    <img src="assets/gallery-images/{{this}}" width="100%" height="100%">
+    <img src="assets/gallery-images/{{this}}" class="thumbnail">
     </a>
   </div>
 {{/each}}
@@ -43,6 +49,7 @@
 
   {{>footer}}
 
+<!--
 <script>
   Fancybox.bind('[data-fancybox="gallery"]', {
   dragToClose: false,
@@ -72,7 +79,7 @@
   },
 });
 </script>
-
+-->
 </body>
 
 </html>
