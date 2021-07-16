@@ -11,6 +11,8 @@ const { Console } = require('console');
 const axios = require('axios');
 const fetchFiles = require('./util/fetch-image')
 const fetchVideos = require('./util/fetch-videos')
+const Teacher = require('./models/model-teacher')
+require('./db/mongoose');
 
 const app = express();
 const port = process.env.PORT || 3030;
@@ -22,7 +24,8 @@ const publicDir = path.join(__dirname, "../public")
 const viewsPath = path.join(__dirname, "../templates/views")
 const partialPath = path.join(__dirname, "../templates/partials")
 
-
+//check .env
+console.log(process.env.DB_URI)
 
 // set-up handlebars engine and path to views
 app.set('view engine', 'hbs');
@@ -125,10 +128,29 @@ res.render('photo-gallery', {
 })
 
 
+//teachers page API
+app.get('/api/teacher', async()=>{
+try{
+   const teacher = await Teacher.find({})
+}catch(error){
+
+}
+})
+
+app.post('/api/teacher', async()=>{
+    try{
+
+    }catch(error){
+
+    }
+})
+
+// error handling
 app.get('*', (req, res)=>{
     res.send('404 not found!')
 })
 
+//server runs
 app.listen(port, ()=>{
     console.log(`server running on Port:${port}`);
 })
