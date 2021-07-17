@@ -1661,3 +1661,7 @@ background-color: #292929;
 .gray {
   background-color :rgba(255, 255, 255, 0.9);
 }
+
+#modal {
+  background-color: #222222;
+}
