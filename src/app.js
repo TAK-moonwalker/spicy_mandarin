@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const mongoose = require('mongoose')
 const express = require('express');
-require('dotenv').config()
+require('dotenv').config();
 const bodyParser = require('body-parser')
 const { SIGTERM } = require('constants');
 const hbs = require('hbs');
@@ -137,12 +137,61 @@ try{
 }
 })
 
-app.post('/api/teacher', async()=>{
-    try{
+app.post('/api/teacher', async(req, res)=>{
+    
+    const newTeacher = new Teacher(req.body);
+
+try{
+
+        const teacher = await newTeacher.save();
+        res.status(202).send(teacher);
 
     }catch(error){
 
     }
+})
+
+app.get('/api/teachers', async (req, res)=>{
+
+try{
+ const teacherList = await Teacher.find({}).sort({name: 1});
+ res.json(teacherList);
+
+}catch(error){
+    res.status(502).send('Failed to fetch teacher data');
+}
+
+})
+
+app.post('/api/teachers', async(req, res)=>{
+    try{
+    const response = await Teacher.insertMany(
+        req.body
+    )
+res.send(response);
+
+    }catch(error){
+        console.log('Failed to InsertMany')
+    }
+})
+
+app.get('/api/teacher/:id', async(req, res)=>{
+const _id = req.params.id;
+
+try{
+   
+    const teacher = await Teacher.findById(_id);
+    if(!teacher){
+      return res.status(404).send("teacher not found")
+    }
+
+    res.json(teacher);
+
+}catch(error){
+    res.status(502).send(error)
+}
+
+
 })
 
 // error handling

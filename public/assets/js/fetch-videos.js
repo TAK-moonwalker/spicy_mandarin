@@ -5,7 +5,7 @@ function loadVideos() {
     const modalLocation = document.querySelector('#modal')
 
    //Fetch videos from API
-fetch('', {
+fetch('http://localhost:3030/api/videos/lesson', {
         method: 'get',
           dataType: 'json',
     })
@@ -19,7 +19,7 @@ fetch('', {
     
                 imgGallery += 
                 `<!--create modal link-->
-                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                <div class="item col-lg-3 col-md-4 col-sm-6 col-xs-12 mt-3 mb-3">
                 <a data-toggle="modal" data-target="#modal${i}"><img class="img-fluid z-depth-1" src="${response.srcUrl[i]}" alt="video"></a>
                 </div>`
                 
@@ -45,6 +45,9 @@ fetch('', {
                 </div>`
     
             } //for-loop end
+
+            // console.log(imgGallery);
+            // console.log(videoModal);
                 
             gallery.innerHTML+= imgGallery;
             modalLocation.innerHTML += videoModal;

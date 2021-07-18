@@ -1665,3 +1665,7 @@ background-color: #292929;
 #modal {
   background-color: #222222;
 }
+
+.item:hover{
+  filter: brightness(70%);
+}
