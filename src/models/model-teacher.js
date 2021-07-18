@@ -5,7 +5,7 @@ const VideoSchema = new mongoose.Schema({
     videoId:{
         type: String
     },
-    videoUrl: {
+    videoThumbnail: {
         type: String
     }
 })
