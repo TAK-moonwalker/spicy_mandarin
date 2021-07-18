@@ -66,9 +66,9 @@ try{
         videoID.push(element.snippet.resourceId.videoId);
         srcUrl.push(element.snippet.thumbnails.medium.url);
     })
-    console.log(titles);
-    console.log(videoID);
-    console.log(srcUrl);
+    //console.log(titles);
+    //console.log(videoID);
+    //console.log(srcUrl);
     res.json({
         titles,
         videoID,
@@ -86,7 +86,8 @@ app.get('/api/videos/teaser', async (req, res)=>{
     const URL =  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLa0YnQw04I6ufLa4SmC9Mmf7Rjqr7eNvM&key=${process.env.API_KEY}`;
 try{
     const resObj = await fetchVideos(URL);
-    res.send(resObj);
+    const itemArrayTs = resObj.items
+    res.send(itemArrayTs);
     
 
 }catch(error){
@@ -100,7 +101,8 @@ app.get('/api/videos/bts', async (req, res)=>{
     const URL =  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLa0YnQw04I6uYMCxTyxNWLwfoqfW9pqkv&key=${process.env.API_KEY}`;
 try{
     const resObj = await fetchVideos(URL);
-    res.send(resObj);
+    const itemArrayBts = resObj.items
+    res.send(itemArrayBts);
     
 
 }catch(error){
@@ -109,7 +111,7 @@ try{
 })
 
 
-//image gallery API
+//image gallery Page rendering
 app.get('/gallery', async (req, res)=>{
     const images = path.join(__dirname, "../public/assets/gallery-images")
    // console.log(images);
@@ -127,6 +129,17 @@ res.render('photo-gallery', {
 
 })
 
+
+//image gallery API 
+app.get('/api/images', async(req, res)=>{
+    const images = path.join(__dirname, "../public/assets/gallery-images")
+    try{
+const imageList = await fetchFiles(images);
+res.json(imageList);
+    }catch(error){
+        res.send("Failed to fecth images");
+    }
+})
 
 //teachers page API
 app.get('/api/teacher', async()=>{
