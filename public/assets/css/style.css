@@ -1705,3 +1705,13 @@ background-color: #292929;
 .item:hover{
   filter: brightness(70%);
 }
+
+.video:hover{
+  filter: brightness(70%);
+}
+
+#video-gallery{
+  position: relative;
+max-width: 100%;
+background-color: #292929;
+}

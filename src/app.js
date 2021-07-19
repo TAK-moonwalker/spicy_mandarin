@@ -50,7 +50,7 @@ app.get('/videos',(req, res)=>{
     })
 
 
-// video gallery - Lesson
+// API video gallery - Lesson
 app.get('/api/videos/lesson', async (req, res)=>{
     
     const URL =  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLa0YnQw04I6tWGRCtKrB9L5bZnK9GEbHP&key=${process.env.API_KEY}`;
@@ -75,12 +75,14 @@ try{
         srcUrl
     })
 
+
 }catch(error){
     res.status(500).send(error);
 }
 })
 
-// video gallery - Teaser
+
+// API video gallery - Teaser
 app.get('/api/videos/teaser', async (req, res)=>{
     
     const URL =  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLa0YnQw04I6ufLa4SmC9Mmf7Rjqr7eNvM&key=${process.env.API_KEY}`;
@@ -95,7 +97,7 @@ try{
 }
 })
 
-// video gallery - BTS
+// API video gallery - BTS
 app.get('/api/videos/bts', async (req, res)=>{
     
     const URL =  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLa0YnQw04I6uYMCxTyxNWLwfoqfW9pqkv&key=${process.env.API_KEY}`;
@@ -107,6 +109,15 @@ try{
 
 }catch(error){
     res.status(500).send(error);
+}
+})
+
+
+app.get('/lessons', async (req, res) => {
+    try{
+    res.render('video-gallery-lesson')
+}catch(error){
+    res.status(404).send("pag not found")
 }
 })
 

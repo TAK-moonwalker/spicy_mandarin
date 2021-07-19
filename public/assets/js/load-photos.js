@@ -1,7 +1,7 @@
 function loadPhotos(){
 
 //DOM ELEMNT :
-const gridGallery = document.querySelector("#photo-items")
+const gridGallery = document.querySelector("#grid")
 
 //Fetch photos :
 fetch('http://localhost:3030/api/images', {
@@ -12,15 +12,24 @@ fetch('http://localhost:3030/api/images', {
 .then((response)=>{
 
     //console.log(response);
-  let photoGallery = "";
+//   let photoGallery = "";
 
 for(i=0;i<12;i++){
 
-    photoGallery += `<div class="grid-item"><img src="/assets/gallery-images/${response[i]}"></div>`
-    console.log(response[i]);
-}
+let div = document.createElement("div") //.setAttribute("class", "grid-item");
+let img = document.createElement("img") //.setAttribute("src", `/assets/gallery-images/${response[i]}`);
+div.className = "grid-item";
+img.setAttribute("src", `/assets/gallery-images/${response[i]}`)
 
-gridGallery.innerHTML+=photoGallery;
+div.appendChild(img);
+
+gridGallery.appendChild(div);
+
+console.log(div);
+
+
+}  //end for-loop
+
 
 
 })

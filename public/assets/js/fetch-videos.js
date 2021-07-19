@@ -12,17 +12,29 @@ fetch('http://localhost:3030/api/videos/lesson', {
     .then(response => response.json())
     .then((response)=>{
 
-            let imgGallery = "";
+            // let imgGallery = "";
             let videoModal = "";
     
-            for(i=0;i<12;i++){
-    
-                imgGallery += 
-                `<!--create modal link-->
-                <div class="item col-lg-3 col-md-4 col-sm-6 col-xs-12 mt-3 mb-3">
-                <a data-toggle="modal" data-target="#modal${i}"><img class="img-fluid z-depth-1" src="${response.srcUrl[i]}" alt="video"></a>
-                </div>`
-                
+            for(let i=0;i<12;i++){
+
+                //image thumbnail generator
+                let div = document.createElement("div");
+                div.classList.add("item", "col-lg-3", "col-md-4", "col-sm-6", "col-xs-12", "mt-3", "mb-3");
+                let alink = document.createElement("a");
+                alink.setAttribute("data-toggle", "modal");
+                alink.setAttribute("data-target", `#modal${i}`);
+                let imgSrc = document.createElement("img");
+                imgSrc.setAttribute("src", `${response.srcUrl[i]}`);
+                imgSrc.classList.add("img-fluid", "z-depth-1");
+
+                alink.appendChild(imgSrc);
+                div.appendChild(alink);
+
+                gallery.appendChild(div);
+
+                console.log(div);
+
+                //modals generator
                 videoModal += 
                 `<div class="modal fade" id="modal${i}">
                 <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -49,7 +61,7 @@ fetch('http://localhost:3030/api/videos/lesson', {
             // console.log(imgGallery);
             // console.log(videoModal);
                 
-            gallery.innerHTML+= imgGallery;
+            // gallery.innerHTML+= imgGallery;
             modalLocation.innerHTML += videoModal;
     
                 
