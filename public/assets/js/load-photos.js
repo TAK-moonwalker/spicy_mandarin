@@ -4,7 +4,7 @@ function loadPhotos(){
 const gridGallery = document.querySelector("#grid")
 
 //Fetch photos :
-fetch('http://localhost:3030/api/images', {
+fetch('/api/images', {
         method: 'get',
           dataType: 'json'
     })
