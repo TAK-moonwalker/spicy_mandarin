@@ -1571,7 +1571,10 @@ html { overflow-y: scroll; }
 
 body { font-family: sans-serif; }
 
-/* ---- grid-Masonry ---- */
+/*--------------------------------------------------------------
+# Grid-masonry
+--------------------------------------------------------------*/
+
 
 .grid {
   background:#222222;
@@ -1584,7 +1587,7 @@ body { font-family: sans-serif; }
   clear: both;
 }
 
-/* ---- .grid-item ---- */
+
 
 .grid-sizer,
 .grid-item {
@@ -1601,9 +1604,42 @@ body { font-family: sans-serif; }
 }
 
 
+/*Desktops and laptops ------*/
+@media only screen and (min-width : 1224px) {
+.grid-sizer,
+.grid-item {
+  width: 20%;
+}
+}
+
+/* iPads (portrait and landscape) ------*/
+@media only screen
+and (min-width : 768px)
+and (max-width : 1024px) {
+  .grid-sizer,
+.grid-item {
+  width: 25%;
+}
+}
+
+/* Smartphones (portrait and landscape) ------*/
+@media only screen
+and (min-width : 320px)
+and (max-width : 480px) {
+  .grid-sizer,
+.grid-item {
+  width: 50%;
+}
+}
 /*--------------------------------------------------------------
 # Custom
 --------------------------------------------------------------*/
+
+#teacherContainer{
+  padding-top: 8rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
 
 #Youtube {
   background-color: #343a40;
@@ -1711,7 +1747,6 @@ background-color: #292929;
 }
 
 #video-gallery{
+  padding-top: 8rem;
   position: relative;
-max-width: 100%;
-background-color: #292929;
 }

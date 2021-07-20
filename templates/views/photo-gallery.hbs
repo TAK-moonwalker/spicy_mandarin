@@ -1,10 +1,10 @@
 {{>header}}
 
 <style type="text/css">
-.item{
+.grid-item{
   transition: .5s ease-in-out;
 }
-.item:hover{
+.grid-item:hover{
   filter: brightness(70%);
 }
 
@@ -29,7 +29,7 @@
 </p>
 -->
 
-<section id="photoGallery">
+{{!-- <section id="photoGallery">
   <div class="container-fluid">
 <div class="row">
 {{#each list}}
@@ -44,11 +44,30 @@
 </div>
 
 
+</section> --}}
+
+<section id="photoGallery">
+  <div class="container-fluid">
+<div id="grid">
+<div class="grid-sizer"></div>
+{{#each list}}
+  <div class="grid-item">
+      <a id="@index" href="assets/gallery-images/{{this}}">
+    <img src="assets/gallery-images/{{this}}" class="thumbnail">
+    </a>
+  </div>
+{{/each}}
+</div>
+</div>
+
+
 </section>
 
 
   {{>footer}}
-
+  <script src="assets/js/masonry.js"></script>
+  <script src="assets/js/mgf-popup-photos.js"></script>
+  <script src="assets/js/jquery.magnific-popup.min.js"></script>
 <!--
 <script>
   Fancybox.bind('[data-fancybox="gallery"]', {

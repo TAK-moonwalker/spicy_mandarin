@@ -44,7 +44,7 @@ app.get('/',(req, res)=>{
 res.render('index')
 })
 
-// /videos
+// videos
 app.get('/videos',(req, res)=>{
     res.render('videos')
     })
@@ -88,10 +88,19 @@ app.get('/api/videos/teaser', async (req, res)=>{
     const URL =  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLa0YnQw04I6ufLa4SmC9Mmf7Rjqr7eNvM&key=${process.env.API_KEY}`;
 try{
     const resObj = await fetchVideos(URL);
-    const itemArrayTs = resObj.items
-    res.send(itemArrayTs);
-    
+    const itemArrayTs = resObj.items;
 
+    let items = [];
+
+    itemArrayTs.forEach((data)=>{
+items.push(data.snippet)
+    })
+
+    res.json({items});
+
+    //const test = itemArrayTs[0].snippet;
+    //res.send(test);
+       
 }catch(error){
     res.status(500).send(error);
 }
@@ -99,25 +108,52 @@ try{
 
 // API video gallery - BTS
 app.get('/api/videos/bts', async (req, res)=>{
-    
+
     const URL =  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLa0YnQw04I6uYMCxTyxNWLwfoqfW9pqkv&key=${process.env.API_KEY}`;
+    
 try{
     const resObj = await fetchVideos(URL);
-    const itemArrayBts = resObj.items
-    res.send(itemArrayBts);
-    
+    const itemArrayBt = resObj.items;
 
+    let items = [];
+
+    itemArrayBt.forEach((data)=>{
+items.push(data.snippet)
+    })
+    res.json({items});
+
+    //const test = itemArrayTs[0].snippet;
+    //res.send(test);
+       
 }catch(error){
     res.status(500).send(error);
 }
 })
 
 
-app.get('/lessons', async (req, res) => {
+
+// Videos gallery - GET
+app.get('/video/lessons', async (req, res) => {
     try{
     res.render('video-gallery-lesson')
 }catch(error){
-    res.status(404).send("pag not found")
+    res.status(404).send("page not found")
+}
+})
+
+app.get('/video/teaser', async (req, res) => {
+    try{
+    res.render('video-gallery-teaser')
+}catch(error){
+    res.status(404).send("page not found")
+}
+})
+
+app.get('/video/bts', async (req, res) => {
+    try{
+    res.render('video-gallery-bts')
+}catch(error){
+    res.status(404).send("page not found")
 }
 })
 
@@ -175,11 +211,15 @@ try{
     }
 })
 
+
 app.get('/api/teachers', async (req, res)=>{
 
 try{
  const teacherList = await Teacher.find({}).sort({name: 1});
- res.json(teacherList);
+ 
+ res.json({
+   teacherList
+})
 
 }catch(error){
     res.status(502).send('Failed to fetch teacher data');
@@ -217,6 +257,12 @@ try{
 
 
 })
+
+//teacher page - GET
+app.get('/teachers', (req,res)=>{
+    res.render('teacher-gallery')
+})
+
 
 // error handling
 app.get('*', (req, res)=>{
