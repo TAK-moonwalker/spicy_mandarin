@@ -4,7 +4,7 @@ function loadVideosBts() {
     const gallery = document.querySelector("#video-container")
 
    //Fetch videos from API
-fetch('http://localhost:3030/api/videos/bts', {
+fetch('https://tak-spicymandarin.herokuapp.com/api/videos/bts', {
         method: 'get',
           dataType: 'json',
     })

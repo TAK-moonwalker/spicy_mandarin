@@ -19,7 +19,7 @@ function loadTeacherList() {
 
 
    //Fetch videos from API
-fetch('http://localhost:3030/api/teachers', {
+fetch('https://tak-spicymandarin.herokuapp.com/api/teachers', {
         method: 'get',
           dataType: 'json',
     })

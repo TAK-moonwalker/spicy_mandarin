@@ -4,7 +4,7 @@ function loadPhotos(){
 const gridGallery = document.querySelector("#grid")
 
 //Fetch photos :
-fetch('/api/images', {
+fetch('https://tak-spicymandarin.herokuapp.com/api/images', {
         method: 'get',
           dataType: 'json'
     })

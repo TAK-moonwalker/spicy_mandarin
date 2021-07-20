@@ -4,7 +4,7 @@ function loadVideosLesson() {
     const gallery = document.querySelector("#video-container")
 
    //Fetch videos from API
-fetch('http://localhost:3030/api/videos/lesson', {
+fetch('https://tak-spicymandarin.herokuapp.com/api/videos/lesson', {
         method: 'get',
           dataType: 'json',
     })
