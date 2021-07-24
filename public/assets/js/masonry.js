@@ -7,10 +7,14 @@ $(document).ready(function() {
     itemSelector: '.grid-item',
     columnWidth:  '.grid-sizer'
     })
+
+    $grid.imagesLoaded().progress( function() {
+      $grid.masonry();
+    });
 })
 
   // layout Masonry after each image loads
-  $grid.imagesLoaded().progress( function() {
-    $grid.masonry();
-  });  
+  // $grid.imagesLoaded().progress( function() {
+  //   $grid.masonry();
+  // });  
   

@@ -42,7 +42,7 @@ fetch(proUrl, {
 
                 let div3 = document.createElement('a');
                 div3.className = "member-img";
-            
+                div3.setAttribute("href", `/api/teacher/${teacher._id}`)
 
                 let image = document.createElement('img');
                 image.classList.add("img-fluid");
