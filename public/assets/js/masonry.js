@@ -2,14 +2,15 @@
 
 // init Masonry
 $(document).ready(function() {
-
-    $('#grid').masonry({
+   
+    var $grid =  $('#grid').masonry({
     itemSelector: '.grid-item',
     columnWidth:  '.grid-sizer'
-    });
+    })
 })
 
   // layout Masonry after each image loads
   $grid.imagesLoaded().progress( function() {
     $grid.masonry();
   });  
+  

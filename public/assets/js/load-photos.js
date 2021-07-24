@@ -3,15 +3,18 @@ function loadPhotos(){
 //DOM ELEMNT :
 const gridGallery = document.querySelector("#grid")
 
+const urlDev = 'http://localhost:3030/api/images'
+const urlPro = 'https://tak-spicymandarin.herokuapp.com/api/images'
+
 //Fetch photos :
-fetch('https://tak-spicymandarin.herokuapp.com/api/images', {
+fetch(urlDev, {
         method: 'get',
           dataType: 'json'
     })
 .then(response => response.json())
 .then((response)=>{
 
-    //console.log(response);
+    console.log(response);
 //   let photoGallery = "";
 
 for(i=0;i<12;i++){
@@ -19,8 +22,8 @@ for(i=0;i<12;i++){
 let div = document.createElement("div") //.setAttribute("class", "grid-item");
 let img = document.createElement("img") //.setAttribute("src", `/assets/gallery-images/${response[i]}`);
 div.className = "grid-item";
-img.setAttribute("src", `/assets/gallery-images/${response[i]}`)
-console.log(response[1]);
+img.setAttribute("src", `assets/gallery-images/${response[i]}`)
+console.log(response[i]);
 div.appendChild(img);
 
 if(div === null || undefined) { continue; }
@@ -43,4 +46,4 @@ console.log(div);
 
 }
 // Invoking the loadVideos function
-document.addEventListener("DOMContentLoaded", loadPhotos);
+// document.addEventListener("DOMContentLoaded", loadPhotos);
