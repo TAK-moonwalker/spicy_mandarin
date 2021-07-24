@@ -52,7 +52,7 @@
 <div class="grid-sizer"></div>
 {{#each list}}
   <div class="grid-item">
-      <a id="@index" href="assets/gallery-images/{{this}}">
+      <a id={{@index}} href="assets/gallery-images/{{this}}">
     <img src="assets/gallery-images/{{this}}" class="thumbnail">
     </a>
   </div>
@@ -65,40 +65,11 @@
 
 
   {{>footer}}
-  <script src="assets/js/masonry.js"></script>
+ <!-- <script src="assets/js/masonry.js"></script> -->
   <script src="assets/js/mgf-popup-photos.js"></script>
   <script src="assets/js/jquery.magnific-popup.min.js"></script>
-<!--
-<script>
-  Fancybox.bind('[data-fancybox="gallery"]', {
-  dragToClose: false,
-  closeButton: "top",
 
-  Image: {
-    zoom: false,
-  },
 
-  on: {
-    initCarousel: (fancybox) => {
-      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
-
-      fancybox.$container.style.setProperty(
-        "--bg-image",
-        `url("${slide.$thumb.src}")`
-      );
-    },
-    "Carousel.change": (fancybox, carousel, to, from) => {
-      const slide = carousel.slides[to];
-
-      fancybox.$container.style.setProperty(
-        "--bg-image",
-        `url("${slide.$thumb.src}")`
-      );
-    },
-  },
-});
-</script>
--->
 </body>
 
 </html>

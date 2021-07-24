@@ -50,30 +50,45 @@ app.get('/videos',(req, res)=>{
     })
 
 
-// API video gallery - Lesson
-app.get('/api/videos/lesson', async (req, res)=>{
+// API video gallery - Sexy Lesson
+app.get('/api/videos/lesson-sex', async (req, res)=>{
     
-    const URL =  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLa0YnQw04I6tWGRCtKrB9L5bZnK9GEbHP&key=${process.env.API_KEY}`;
+    const URL =  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLy69FmXA8yWtBJ4Lr47ftyHndZ0AD8ACo&key=${process.env.API_KEY}`;
 try{
     const resObj = await fetchVideos(URL);
-    const itemArray = resObj.items
-    //console.log(itemArray);
-    let titles = [];
-    let videoID = [];
-    let srcUrl = [];
-    itemArray.forEach(element => {
-        titles.push(element.snippet.title);
-        videoID.push(element.snippet.resourceId.videoId);
-        srcUrl.push(element.snippet.thumbnails.medium.url);
-    })
-    //console.log(titles);
-    //console.log(videoID);
-    //console.log(srcUrl);
-    res.json({
-        titles,
-        videoID,
-        srcUrl
-    })
+    const itemArrayLesson1 = resObj.items
+    let items = [];
+
+     itemArrayLesson1.forEach((data)=>{
+ items.push(data.snippet)
+     })
+    //res.json({itemArrayBt});
+
+    //const test = itemArrayTs[0].snippet;
+    res.send({items});
+
+
+}catch(error){
+    res.status(500).send(error);
+}
+})
+
+// API video gallery - Spicy Lesson
+app.get('/api/videos/lesson-spc', async (req, res)=>{
+    
+    const URL =  `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLy69FmXA8yWvx76rfQRxYHJeX7NRVJQow&key=${process.env.API_KEY}`;
+try{
+    const resObj = await fetchVideos(URL);
+    const itemArrayLesson2 = resObj.items
+    let items = [];
+
+     itemArrayLesson2.forEach((data)=>{
+ items.push(data.snippet)
+     })
+    //res.json({itemArrayBt});
+
+    //const test = itemArrayTs[0].snippet;
+    res.send({items});
 
 
 }catch(error){
@@ -92,14 +107,13 @@ try{
 
     let items = [];
 
-    itemArrayTs.forEach((data)=>{
-items.push(data.snippet)
-    })
-
-    res.json({items});
+     itemArrayTs.forEach((data)=>{
+ items.push(data.snippet)
+     })
+    //res.json({itemArrayBt});
 
     //const test = itemArrayTs[0].snippet;
-    //res.send(test);
+    res.send({items});
        
 }catch(error){
     res.status(500).send(error);
@@ -115,15 +129,15 @@ try{
     const resObj = await fetchVideos(URL);
     const itemArrayBt = resObj.items;
 
-    let items = [];
+     let items = [];
 
-    itemArrayBt.forEach((data)=>{
-items.push(data.snippet)
-    })
-    res.json({items});
+     itemArrayBt.forEach((data)=>{
+ items.push(data.snippet)
+     })
+    //res.json({itemArrayBt});
 
     //const test = itemArrayTs[0].snippet;
-    //res.send(test);
+    res.send({items});
        
 }catch(error){
     res.status(500).send(error);
@@ -133,29 +147,31 @@ items.push(data.snippet)
 
 
 // Videos gallery - GET
-app.get('/video/lessons', async (req, res) => {
-    try{
-    res.render('video-gallery-lesson')
-}catch(error){
-    res.status(404).send("page not found")
-}
+app.get('/lesson-sex', (req, res)=>{
+    res.render('videosexylesson', {
+        title:"Video - Sexy Series"
+    })
 })
 
-app.get('/video/teaser', async (req, res) => {
-    try{
-    res.render('video-gallery-teaser')
-}catch(error){
-    res.status(404).send("page not found")
-}
+app.get('/lesson-spc', (req, res)=>{
+    res.render('videospicylesson', {
+        title: "Video - Spicy Series"
+    })
 })
 
-app.get('/video/bts', async (req, res) => {
-    try{
-    res.render('video-gallery-bts')
-}catch(error){
-    res.status(404).send("page not found")
-}
+app.get('/bts', (req, res)=>{
+    res.render('videobts', {
+        title:"Video - BTS"
+    })
 })
+
+app.get('/teaser', (req, res) =>{
+    res.render('videoteaser', {
+        title:"Video - Teaser"
+    })
+})
+
+
 
 
 //image gallery Page rendering
@@ -263,6 +279,12 @@ app.get('/teachers', (req,res)=>{
     res.render('teacher-gallery')
 })
 
+//test page
+app.get('/test', (req, res)=>{
+    res.render('test', {
+        title: "Video - BTS"
+    });
+})
 
 // error handling
 app.get('*', (req, res)=>{

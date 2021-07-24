@@ -20,8 +20,10 @@ let div = document.createElement("div") //.setAttribute("class", "grid-item");
 let img = document.createElement("img") //.setAttribute("src", `/assets/gallery-images/${response[i]}`);
 div.className = "grid-item";
 img.setAttribute("src", `/assets/gallery-images/${response[i]}`)
-
+console.log(response[1]);
 div.appendChild(img);
+
+if(div === null || undefined) { continue; }
 
 gridGallery.appendChild(div);
 

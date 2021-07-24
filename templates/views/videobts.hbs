@@ -1,0 +1,58 @@
+{{>header}}
+<link rel="stylesheet" href="./assets/css/video-gallery.css">
+<body style="background-color: #1B2631;">
+{{>navi}}
+
+<section style="margin-top: 2rem; margin-left: 1.5rem;">
+  <h1 style="color:#FF0000;">{{title}}</h1>
+  <div id="video-gallery" class="container">
+  <div id="video-container" class="d-flex flex-wrap g-2"> 
+  
+      <!--Video Gallery Here-->
+  
+      <!-- 
+          <a class="video" title="Sey mandarin" href="https://www.youtube.com/watch?v=wJ72ZbFDNe4"><img class="img-fluid z-depth-1 m-2" src="https://dzasv7x7a867v.cloudfront.net/product_photos/39616920/2527782839_563758211_large_original.jpg"></a>
+      -->
+  
+  
+  </div>
+  </div>
+</section>
+
+{{>footer}}
+
+<script src="./assets/js/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript" src="assets/js/fetch-YT-Videos.js"> </script> 
+
+<script>
+  document.addEventListener("DOMContentLoaded", ()=>{
+   loadYTVideos("bts");
+ }); 
+</script>
+
+<script>
+
+$(document).ready(function(){
+  $('#video-container').magnificPopup({
+    delegate: 'a', // child items selector, by clicking on it popup will open
+    type: 'iframe',
+    // other options
+    iframe: {
+       markup: '<div class="mfp-iframe-scaler">'+
+                  '<div class="mfp-close"></div>'+
+                  '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
+                  //'<div class="mfp-title">Some caption</div>'+
+                '</div>'
+    },
+    callbacks: {
+      markupParse: function(template, values, item) {
+       values.title = item.el.attr('title');
+      }
+  }
+  });
+  })
+
+</script>
+
+</body>
+</html>

@@ -25,6 +25,47 @@
   rel="stylesheet"
 />
 
+<link rel="stylesheet" href="./assets/css/magnific-popup.css">
+
+
+
+<style>
+
+body{
+  background-color: #1B2631 ;
+}
+
+.container-fluid{
+  margin-top:20px;
+}
+
+a img{
+  width:100%;
+}
+
+.title{
+  font-size:0.7rem;
+  background-color:#34495E;
+  padding:7px;
+  color:#EBEDEF;
+}
+
+/* the fix */
+#video-container::after {
+  content:"";
+  width:1px;
+  margin-right:-1px;
+}
+
+.item:hover{
+  filter: brightness(70%);
+}
+
+div.item{
+  margin:7px;
+}
+
+</style>
 
   <title>YouTube Api Gallery</title>
   <meta name="description" content="SexyMandarin Videos">
@@ -32,27 +73,61 @@
 
 </head>
 <body>
-    <div class="container-fluid bg-dark text-white" data-aos="fade-up">
-<!-- Modal gallery -->
-<section id="videos" class="youtubeApi">
-  <div class='container' id='videoGallyery'>
-      <div class="row">
+<section style="margin-top: 3rem; margin-left: 1.5rem;">
+  <h1 style="color:#FF0000;">Video Gallery</h1>
+  <div id="video-gallery" class="container">
+  <div id="video-container" class="d-flex flex-wrap g-2"> 
+  
+      <!--Video Gallery Here-->
+  
+      <!-- 
+          <a class="video" title="Sey mandarin" href="https://www.youtube.com/watch?v=wJ72ZbFDNe4"><img class="img-fluid z-depth-1 m-2" src="https://dzasv7x7a867v.cloudfront.net/product_photos/39616920/2527782839_563758211_large_original.jpg"></a>
+      -->
+  
+  
+  </div>
+  </div>
+</section>
 
-          <!-- gallery Code here -->
-       
-      </div>
-    </div>
-  </section>
-</div>
+<script>
+  document.addEventListener("DOMContentLoaded", ()=>{
+   loadYTVideos("bts");
+ }); 
+</script>
 
-  <script src="assets/js/yt-video-list-api-2.js"></script>
-  <!-- MDB -->
-<!-- MDB -->
-<script
-  type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
-></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="./assets/js/jquery.magnific-popup.min.js"></script>
+ 
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script> -->
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 
+<script type="text/javascript" src="assets/js/fetch-YT-Videos.js"> </script> 
+
+<script>
+
+$(document).ready(function(){
+  $('#video-container').magnificPopup({
+    delegate: 'a', // child items selector, by clicking on it popup will open
+    type: 'iframe',
+    // other options
+    iframe: {
+       markup: '<div class="mfp-iframe-scaler">'+
+                  '<div class="mfp-close"></div>'+
+                  '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
+                  //'<div class="mfp-title">Some caption</div>'+
+                '</div>'
+    },
+    callbacks: {
+      markupParse: function(template, values, item) {
+       values.title = item.el.attr('title');
+      }
+  }
+  });
+  })
+
+
+
+</script>
 </body>
+</html>

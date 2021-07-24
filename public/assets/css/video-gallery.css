@@ -1,0 +1,30 @@
+
+.container-fluid{
+  margin-top:20px;
+}
+
+a img{
+  width:100%;
+}
+
+.title{
+  font-size:0.7rem;
+  background-color:#34495E;
+  padding:7px;
+  color:#EBEDEF;
+}
+
+/* the fix */
+#video-container::after {
+  content:"";
+  width:1px;
+  margin-right:-1px;
+}
+
+.item:hover{
+  filter: brightness(70%);
+}
+
+div.item{
+  margin:7px;
+}
