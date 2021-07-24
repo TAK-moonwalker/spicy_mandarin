@@ -18,7 +18,7 @@ function loadTeacherList() {
     // make div1, div2, div3, img, div info, h4, span  -> div3.appendChild(img) -> div2.appendChild(div3) -> div2.appendChild(div info)
 
     const devUrl = 'http://localhost:3030/api/teachers';
-    const proUrl = 'https://tak-spicymandarin.herokuapp.com/api/teachers'
+    const proUrl = 'https://tak-spicymandarin.herokuapp.com/api/teachers';
 
    //Fetch videos from API
 fetch(proUrl, {
