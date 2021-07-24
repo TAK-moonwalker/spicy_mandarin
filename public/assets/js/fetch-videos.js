@@ -8,7 +8,7 @@ function loadVideos() {
     const urlPro = 'https://tak-spicymandarin.herokuapp.com/api/videos/lesson-spc'
 
    //Fetch videos from API
-fetch(urlDev, {
+fetch(urlPro, {
         method: 'get',
           dataType: 'json',
     })

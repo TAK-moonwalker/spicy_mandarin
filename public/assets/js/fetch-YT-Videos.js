@@ -7,7 +7,7 @@ const loadYTVideos = (api_path) => {
     const urlPro = `https://tak-spicymandarin.herokuapp.com/api/videos/${api_path}`
 
    //Fetch videos from API
-fetch(urlDev, {
+fetch(urlPro, {
         method: 'get',
           dataType: 'json',
     })

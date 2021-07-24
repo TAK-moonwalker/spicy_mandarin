@@ -7,7 +7,7 @@ const urlDev = 'http://localhost:3030/api/images'
 const urlPro = 'https://tak-spicymandarin.herokuapp.com/api/images'
 
 //Fetch photos :
-fetch(urlDev, {
+fetch(urlPro, {
         method: 'get',
           dataType: 'json'
     })

@@ -21,7 +21,7 @@ function loadTeacherList() {
     const proUrl = 'https://tak-spicymandarin.herokuapp.com/api/teachers'
 
    //Fetch videos from API
-fetch(devUrl, {
+fetch(proUrl, {
         method: 'get',
           dataType: 'json',
     })
