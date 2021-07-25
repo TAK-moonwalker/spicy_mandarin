@@ -20,7 +20,7 @@ const port = process.env.PORT || 3030;
 app.use(express.json());
 
 // define path for express
-const publicDir = path.join(__dirname, "../public")
+const publicDir = path.join(__dirname, "../public/")
 const viewsPath = path.join(__dirname, "../templates/views")
 const partialPath = path.join(__dirname, "../templates/partials")
 
@@ -269,13 +269,17 @@ try{
     const checkElm = teacher.profilePhoto;
     //check iframe or image
     if(reg.test(checkElm)){
-    res.render('teacher-profile-iframe', {
+    res.render('teacher-profile-video', {
        teacher
     });
 }else{
-    res.render('teacher-profile-img', {
+
+    res.render("teacher-profile", {
         teacher
-});
+    })
+//     res.render('teacher-profile-img', {
+//         teacher
+// });
 }  
 }catch(error){
     res.status(502).send(error)
