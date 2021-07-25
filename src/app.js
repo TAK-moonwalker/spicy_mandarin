@@ -256,7 +256,9 @@ res.send(response);
 })
 
 app.get('/api/teacher/:id', async(req, res)=>{
+    
 const _id = req.params.id;
+const reg = new RegExp("iframe");
 
 try{
    
@@ -264,9 +266,17 @@ try{
     if(!teacher){
       return res.status(404).send("teacher not found")
     }
-
-    res.json(teacher);
-
+    const checkElm = teacher.profilePhoto;
+    //check iframe or image
+    if(reg.test(checkElm)){
+    res.render('teacher-profile-iframe', {
+       teacher
+    });
+}else{
+    res.render('teacher-profile-img', {
+        teacher
+});
+}  
 }catch(error){
     res.status(502).send(error)
 }

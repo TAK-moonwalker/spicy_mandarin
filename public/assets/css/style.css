@@ -1750,3 +1750,24 @@ background-color: #292929;
   padding-top: 8rem;
   position: relative;
 }
+
+/*--------------------------------------------------------------
+# Teachers Profile page
+--------------------------------------------------------------*/
+
+
+#profile .card-body{
+background-color:#fae6ff;
+padding:2rem;
+}
+
+#profile .teacher-info{
+  background-color:#fae6ff;
+  padding:2rem;
+  }
+
+#profile h3{
+  margin-top: 3rem;
+  padding:2rem;
+  background-color: crimson;
+  }
