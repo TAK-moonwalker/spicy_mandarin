@@ -19,7 +19,7 @@ fetch(urlPro, {
             console.log(itemList);
             console.log(itemList[0].title);
            for(let i=0; itemList.length >i ;i++){
-            if (itemList[i].resourceId.videoId == "tx8x_f7pBhQ" || null || undefined) { continue; }
+            if (itemList[i].resourceId.videoId == "tx8x_f7pBhQ" || itemList[i].resourceId.videoId == "4d3k9y_WR8I" || itemList[i].resourceId.videoId == null || itemList[i].resourceId.videoId == undefined) { continue; }
 //image thumbnail generator
 
 // <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 m-2 item">
