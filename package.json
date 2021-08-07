@@ -12,13 +12,18 @@
   "dependencies": {
     "@fancyapps/fancybox": "^3.5.7",
     "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "connect-mongo": "^4.4.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "hbs": "^4.1.2",
     "magnific-popup": "^1.1.0",
     "masonry-layout": "^4.2.2",
     "mongoose": "^5.12.14",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "validator": "^13.6.0"
   },
   "devDependencies": {

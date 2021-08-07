@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const mongoose = require('mongoose')
 const express = require('express');
+const passport = require('passport');
 require('dotenv').config();
 const bodyParser = require('body-parser')
 const { SIGTERM } = require('constants');
@@ -9,23 +10,52 @@ const hbs = require('hbs');
 const { send } = require('process');
 const { Console } = require('console');
 const axios = require('axios');
+var bcrypt = require('bcryptjs');
 const fetchFiles = require('./util/fetch-image')
 const fetchVideos = require('./util/fetch-videos')
 const Teacher = require('./models/model-teacher')
-require('./db/mongoose');
 
 const app = express();
 const port = process.env.PORT || 3030;
 
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const UserModel = require('./models/uder-model');
+
+//include mongoDB
+require('./db/mongoose');
+
+//set up session
+const dbURL = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.jc3q0.mongodb.net/SpicyMandarin?retryWrites=true&w=majority`
+
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+        mongoUrl: dbURL,
+        collectionName: 'sessions' // See below for details
+      }),
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 15 // Equals 1 day (1 day * 24 hr/1 day * 60 min/1 hr * 60 sec/1 min * 1000 ms / 1 sec)
+    }
+}));
+
+//require config file
+require('../config/passport');
+require('../config/session');
+
+app.use(passport.initialize());
+app.use(passport.session())
+
 app.use(express.json());
+
 
 // define path for express
 const publicDir = path.join(__dirname, "../public/")
 const viewsPath = path.join(__dirname, "../templates/views")
 const partialPath = path.join(__dirname, "../templates/partials")
 
-//check .env
-console.log(process.env.DB_URI)
 
 // set-up handlebars engine and path to views
 app.set('view engine', 'hbs');
@@ -300,6 +330,23 @@ app.get('/test', (req, res)=>{
     });
 })
 
+
+//user login and registration page route
+app.post('/register', async (req, res)=>{
+
+     const user = new UserModel(req.body)
+     console.log(user);
+
+    try{
+           const newUser = await user.save();
+           res.send(newUser);
+ 
+    }catch(error){
+        res.send('failed to register')
+    }
+
+})
+
 // error handling
 app.get('*', (req, res)=>{
     res.send('404 not found!')
@@ -309,3 +356,6 @@ app.get('*', (req, res)=>{
 app.listen(port, ()=>{
     console.log(`server running on Port:${port}`);
 })
+
+
+//Playground
