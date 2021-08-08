@@ -11,9 +11,10 @@ const { send } = require('process');
 const { Console } = require('console');
 const axios = require('axios');
 var bcrypt = require('bcryptjs');
-const fetchFiles = require('./util/fetch-image')
-const fetchVideos = require('./util/fetch-videos')
-const Teacher = require('./models/model-teacher')
+const fetchFiles = require('./util/fetch-image');
+const fetchVideos = require('./util/fetch-videos');
+const isAuth = require('./util/auth').isAuth;
+const Teacher = require('./models/model-teacher');
 
 const app = express();
 const port = process.env.PORT || 3030;
@@ -45,10 +46,18 @@ app.use(session({
 require('../config/passport');
 require('../config/session');
 
+app.use(express.json());
+
 app.use(passport.initialize());
 app.use(passport.session())
 
-app.use(express.json());
+//Playground
+app.use((req,res,next)=>{
+    console.log(req.session);
+    console.log(req.user);
+    next();
+})
+
 
 
 // define path for express
@@ -75,7 +84,7 @@ res.render('index')
 })
 
 // videos
-app.get('/videos',(req, res)=>{
+app.get('/videos', isAuth, (req, res)=>{
     res.render('videos')
     })
 
@@ -340,11 +349,24 @@ app.post('/register', async (req, res)=>{
     try{
            const newUser = await user.save();
            res.send(newUser);
+           //res.redirect('/login')
  
     }catch(error){
         res.send('failed to register')
     }
 
+})
+
+app.get('/login', (req, res)=>{
+    res.render('login');
+})
+
+app.get('/register', (req, res)=>{
+    res.render('register');
+})
+
+app.post('/login', isAuth, async (req, res)=>{
+    res.send(req.user);
 })
 
 // error handling
@@ -358,4 +380,3 @@ app.listen(port, ()=>{
 })
 
 
-//Playground

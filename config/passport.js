@@ -7,7 +7,7 @@ const UserModel = require('../src/models/uder-model');
 
 
 // 1,pass to passport.use method the strategy and varify callback to passport object to configure
-
+// namefield expexted from "req.body" object
 const customFields = {
     usernameField: 'email',
     passwordField: 'password'
@@ -20,7 +20,7 @@ const strategy = new LocalStrategy(customFields, (username, password, done)=>{
 
         if (!user) { return done(null, false) }
         
-        const isValid = bcrypt.compareSync(password, user.hash);
+        const isValid = bcrypt.compare(password, user.password);
         
         if (isValid) {
             return done(null, user);
@@ -43,7 +43,7 @@ passport.serializeUser(function(user, done) {
   });
   
   passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
+    UserModel.findById(id, function(err, user) {
       done(err, user);
     });
   });
