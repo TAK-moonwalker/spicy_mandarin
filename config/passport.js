@@ -13,24 +13,46 @@ const customFields = {
     passwordField: 'password'
 }
 
-const strategy = new LocalStrategy(customFields, (username, password, done)=>{
+// const strategy = new LocalStrategy(customFields, (username, password, done)=>{
 
-    UserModel.findOne({ email: username })
-    .then((user) => {
+//     UserModel.findOne({ email: username })
+//     .then((user) => {
 
-        if (!user) { return done(null, false) }
+//         if (!user) { return done(null, false) }
         
-        const isValid = bcrypt.compare(password, user.password);
+//         const isValid = bcrypt.compare(password, user.password);
         
+//         if (isValid) {
+//             return done(null, user);
+//         } else {
+//             return done(null, false);
+//         }
+//     })
+//     .catch((err) => {   
+//         done(err);
+//     });
+
+// });
+
+const strategy = new LocalStrategy(customFields, async (username, password, done)=>{
+
+   try{
+   const user = await UserModel.findOne({ email: username })
+
+        if (!user) {
+            return done(null, false)
+        }
+        
+        const isValid = await bcrypt.compare(password, user.password);
+
         if (isValid) {
             return done(null, user);
         } else {
             return done(null, false);
         }
-    })
-    .catch((err) => {   
-        done(err);
-    });
+}catch(err){
+    done(err);
+}
 
 });
 

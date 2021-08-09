@@ -11,6 +11,7 @@ const { send } = require('process');
 const { Console } = require('console');
 const axios = require('axios');
 var bcrypt = require('bcryptjs');
+var flash = require('connect-flash');
 const fetchFiles = require('./util/fetch-image');
 const fetchVideos = require('./util/fetch-videos');
 const isAuth = require('./util/auth').isAuth;
@@ -41,12 +42,16 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 15 // Equals 1 day (1 day * 24 hr/1 day * 60 min/1 hr * 60 sec/1 min * 1000 ms / 1 sec)
     }
 }));
+// flash message set-up
+app.use(flash());
 
 //require config file
 require('../config/passport');
 require('../config/session');
 
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
 app.use(passport.session())
@@ -84,7 +89,7 @@ res.render('index')
 })
 
 // videos
-app.get('/videos', isAuth, (req, res)=>{
+app.get('/videos', (req, res)=>{
     res.render('videos')
     })
 
@@ -342,19 +347,55 @@ app.get('/test', (req, res)=>{
 
 //user login and registration page route
 app.post('/register', async (req, res)=>{
+     
+    const{name, email, password1, password2} = req.body;
+  
+     let errors = [];
 
-     const user = new UserModel(req.body)
-     console.log(user);
+//check passwords match
+if(password1 !== password2){
+    errors.push({msg: "Passwords do not match"});
+}
 
+//check password length
+if(password1.length < 6){
+    errors.push({msg: "Password should be more than 6 characters"})
+}
+
+//check if email exist
+const userCheck = await UserModel.findOne({
+    email: req.body.email
+})
+    if(userCheck){
+        errors.push({msg: "email already exist"})
+    } 
+
+
+if(errors.length > 0){
+   res.render("register", {
+       errors
+   })
+
+}else{
     try{
+        const user = new UserModel({
+            name:req.body.name,
+            email:req.body.email,
+            password:req.body.password1,
+        })
            const newUser = await user.save();
-           res.send(newUser);
-           //res.redirect('/login')
+        //   res.send(newUser);
+           res.redirect('/login')
  
     }catch(error){
         res.send('failed to register')
     }
+}
+})
 
+app.post('/login', passport.authenticate('local'), async (req, res)=>{
+    res.send("You are now logged in!");
+    console.log(req.body);
 })
 
 app.get('/login', (req, res)=>{
@@ -365,8 +406,9 @@ app.get('/register', (req, res)=>{
     res.render('register');
 })
 
-app.post('/login', isAuth, async (req, res)=>{
-    res.send(req.user);
+app.get('/logout', (req,res)=>{
+    req.logout();
+    res.send('you are logged out');
 })
 
 // error handling
