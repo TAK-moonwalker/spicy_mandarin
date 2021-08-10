@@ -1854,7 +1854,11 @@ padding:2rem;
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="/login" class="get-started-btn scrollto" target="_blank">Log in / Register</a>
+      {{#if auth}}
+       <a href="./logout" id="logout" class="get-started-btn scrollto" target="_blank">Log out</a>
+{{else}}
+     <a href="./login" id="login" class="get-started-btn scrollto" target="_blank">Log in / Register</a>
+{{/if}}
 
     </div>
   </header><!-- End Header -->

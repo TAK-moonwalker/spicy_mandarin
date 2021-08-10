@@ -5,3 +5,21 @@
 </div>
 {{/each}}
 {{/if}}
+
+{{#if success_msg}}
+<div class="alert alert-success" style="background-color:#02D85F;">
+{{success_msg}}
+</div>
+{{/if}}
+
+{{#if error_msg}}
+<div class="alert alert-warning" style="background-color:#B3346C;">
+{{error_msg}}
+</div>
+{{/if}}
+
+{{#if error}}
+<div class="alert alert-warning" style="background-color:#B3346C;">
+{{error}}
+</div>
+{{/if}}

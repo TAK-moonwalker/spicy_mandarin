@@ -45,6 +45,14 @@ app.use(session({
 // flash message set-up
 app.use(flash());
 
+//create global vars
+app.use((req, res, next)=>{
+ res.locals.success_msg = req.flash('success_msg');
+ res.locals.error_msg = req.flash('error_msg');
+ res.locals.error = req.flash('error');
+ next();
+})
+
 //require config file
 require('../config/passport');
 require('../config/session');
@@ -53,8 +61,24 @@ require('../config/session');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//passport middleware
 app.use(passport.initialize());
-app.use(passport.session())
+app.use(passport.session());
+
+app.use((req,res,next)=>{
+    if(req.isAuthenticated()){
+        res.locals = {
+            auth: true
+        }
+        next()
+        
+    } else {
+        res.locals = {
+            auth: false
+        }
+        next()
+    }
+})
 
 //Playground
 app.use((req,res,next)=>{
@@ -191,25 +215,26 @@ try{
 
 
 // Videos gallery - GET
-app.get('/lesson-sex', (req, res)=>{
+app.get('/lesson-sex', isAuth, (req, res)=>{
     res.render('videosexylesson', {
-        title:"Video - Sexy Series"
+        title:"Video - Sexy Series",
+        auth: true
     })
 })
 
-app.get('/lesson-spc', (req, res)=>{
+app.get('/lesson-spc', isAuth, (req, res)=>{
     res.render('videospicylesson', {
         title: "Video - Spicy Series"
     })
 })
 
-app.get('/bts', (req, res)=>{
+app.get('/bts', isAuth, (req, res)=>{
     res.render('videobts', {
         title:"Video - BTS"
     })
 })
 
-app.get('/teaser', (req, res) =>{
+app.get('/teaser', isAuth, (req, res) =>{
     res.render('videoteaser', {
         title:"Video - Teaser"
     })
@@ -385,6 +410,7 @@ if(errors.length > 0){
         })
            const newUser = await user.save();
         //   res.send(newUser);
+           req.flash('success_msg', 'You are now registered and can log in!')
            res.redirect('/login')
  
     }catch(error){
@@ -394,9 +420,16 @@ if(errors.length > 0){
 })
 
 app.post('/login', passport.authenticate('local'), async (req, res)=>{
-    res.send("You are now logged in!");
-    console.log(req.body);
+    res.render("index");
 })
+
+// app.post('/login', (req, res, next)=>{
+//     passport.authenticate('local', {
+//         successRedirect: '/',
+//         failureRedirect: '/login',
+//         failureFlash: true
+//     })(req, res, next)
+// });
 
 app.get('/login', (req, res)=>{
     res.render('login');
@@ -408,7 +441,9 @@ app.get('/register', (req, res)=>{
 
 app.get('/logout', (req,res)=>{
     req.logout();
-    res.send('you are logged out');
+    res.render('index',{
+        auth:false
+    });
 })
 
 // error handling
