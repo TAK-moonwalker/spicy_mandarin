@@ -23,6 +23,7 @@ const port = process.env.PORT || 3030;
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const UserModel = require('./models/uder-model');
+//const { createModelList } = require('./util/image-downloader');
 
 //include mongoDB
 require('./db/mongoose');
@@ -456,4 +457,7 @@ app.listen(port, ()=>{
     console.log(`server running on Port:${port}`);
 })
 
+// const createModelList = require('./util/image-downloader').createModelList;
+
+// createModelList();
 
