@@ -5,9 +5,10 @@ const loadYTVideos = (api_path) => {
     const titleIframe = document.querySelector(".mfp-title")
     const urlDev = `http://localhost:3030/api/videos/${api_path}`
     const urlPro = `https://tak-spicymandarin.herokuapp.com/api/videos/${api_path}`
+    const urlPro2 = `http://dev.spicymandarin.com/api/videos/${api_path}`
 
    //Fetch videos from API
-fetch(urlDev, {
+fetch(urlPro2, {
         method: 'get',
           dataType: 'json',
     })

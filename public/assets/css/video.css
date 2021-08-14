@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+.videoShow{
+position:relative;
+height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+padding:0 20px;
+}
+
+.video-screen{
+
+position:absolute;
+top:0;
+left:0;
+width: 100%;
+height: 100%;
+overflow: hidden;
+background: #1B2631 url(../img/pages/heroBG.jpg) no-repeat center center/cover;
+}
+
+.content{
+    z-index: 5;
+}
+
+.video-screen video{
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.video-screen:after{
+    content: "";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0, 0.4);
+}
